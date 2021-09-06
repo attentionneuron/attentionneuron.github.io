@@ -1,0 +1,14 @@
+{
+  "name": "neuripsanon",
+  "version": "0.0.1",
+  "dependencies": {
+    "markdown-it": "*",
+    "markdown-it-katex": "*",
+    "markdown-it-center-text": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/neuripsanon/neuripsanon.github.io"
+  },
+  "license": "MIT"
+}
