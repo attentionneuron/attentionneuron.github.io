@@ -1,4 +1,4 @@
-# Anon submission to NeurIPS 2021
+# The Sensory Neuron as a Transformer: Permutation-Invariant Neural Networks for Reinforcement Learning
 
 This repo contains the source for the web demo / videos that accompanies the article.
 
