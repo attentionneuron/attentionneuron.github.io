@@ -1,6 +1,6 @@
 ## Acknowledgements
 
-We would like to thank Douglas Eck, Geoffrey Hinton, Anja Austermann, Jeff Dean, Luke Metz, Ben Poole, Jean-Baptiste Mouret, Michiel Adriaan Unico Bacchiani, Heiga Zen, and Alexander M. Lamb for their thoughtful feedback.
+The authors would like to thank Rishabh Agarwal, Jie Tan, Yingtao Tian, Douglas Eck, Aleksandra Faust for valuable discussion and feedback.
 
 The experiments in this work were performed on virtual machines provided by [Google Cloud Platform](https://cloud.google.com/).
 
@@ -35,4 +35,4 @@ Diagrams and text are licensed under Creative Commons Attribution [CC-BY 4.0](ht
 
 ## Supplementary Materials
 
-For further discussion about the implementation details of the experiments, and results for multiple independent runs of the search algorithms, please refer to the Appendix section in the [pdf](https://arxiv.org/abs/21XX.XXXXX) version of this article.
+For further discussion about the implementation details of the experiments, and results for multiple independent runs of the search algorithms, please refer to the **Appendix Section** in the [pdf](https://arxiv.org/abs/21XX.XXXXX) version of this article.

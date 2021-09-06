@@ -159,16 +159,14 @@ We examine Cart-pole swing up <dt-cite key="Gal2016Improving,deepPILCOgithub,ha2
 We use *CartPoleSwingUpHarder* <dt-cite key="learningtopredict2019"></dt-cite>, a more difficult version of the task where the initial positions and velocities are highly randomized, leading to a higher variance of task scenarios.
 In the environment, the agent observes $[x, \dot{x}, cos(\theta), sin(\theta), \dot{\theta}]$, outputs a scalar action, and is rewarded at each step for getting $x$ close to 0 and $cos(\theta)$ close to 1.
 
-<!--<div style="text-align: left;">
+<div style="text-align: left;">
 <figcaption style="color:#FF6C00;">Interactive Demo</figcaption><br/>
 <div id="cartpole_demo" class="unselectable" style="text-align: left;"></div>
 <figcaption style="text-align: left;">
 <b>Permutation Invariant Agent in CartPoleSwingUpHarder</b><br/>
 In this demo, the user can shuffle the order of the 5 inputs at any time, and observe how the agent adapts to the new ordering of the inputs.
 </figcaption>
-</div>-->
-
-TODO: Demo goes here.
+</div>
 
 We use a two-layer neural network as our agent. The first layer is an AttentionNeuron layer with $N=5$ sensory neurons and outputs $m_t \in \mathcal{R}^{16}$. A linear layer takes $m_t$ as input and outputs a scalar action. For comparison, we also trained an agent with a two-layer FNN policy with $16$ hidden units. We use direct policy search to train agents with CMA-ES <dt-cite key="hansen2006cma"></dt-cite>, an evolution strategies (ES) method.
 
@@ -191,10 +189,10 @@ The AttentionNeuron layer should possess 2 properties to achieve these: its outp
 The following figure is a visual confirmation of the permutation invariant property, whereby we plot the output messages from the layer and their changes over time from two tests. Using same environment seed, we keep the observation as-is in the first test but we shuffle the order in the second. As the figure shows, the output messages are identical in the two roll-outs.
 
 <div style="text-align: center;">
-<img class="b-lazy" src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== data-src="assets/png/figure_cartpole_shuffle.png" style="display: block; margin: auto; width: 100%;"/>
+<img class="b-lazy" src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== data-src="assets/png/figure_cartpole_shuffle.png" style="display: block; margin: auto; width: 75%;"/>
 <figcaption style="text-align: left;">
 <b>Permutation invariant outputs</b><br/>
-The output (16-dimensional global latent code) from the AttentionNeuron layer does not change when we input the sensor array as-is (left) or when we randomly shuffle the array (right). Yellow represents higher values, and blue for lower values.
+The output (16-dimensional global latent code) from the AttentionNeuron layer does not change when we input the sensor array as-is (top) or when we randomly shuffle the array (bottom). Yellow represents higher values, and blue for lower values.
 </figcaption>
 </div>
 
@@ -209,6 +207,19 @@ For each of the <span class="katex"><span class="katex-mathml"><math><semantics>
 </figcaption>
 </div>
 <!--For each of the $N=5$ sensory inputs we have one linear regression model with $m_t \in \mathcal{R}^{16}$ as the explanatory variables.-->
+
+Finally, to accompany the quantitative results in this section, we extended the earlier interactive demo to showcase the flexibility of PI agents. Here, our agent, with no additional training, receives 15 input signals in shuffled order, ten of which are pure noise, and the other five are the actual observations from the environment.
+
+<div style="text-align: left;">
+<figcaption style="color:#FF6C00;">Interactive Demo</figcaption><br/>
+<div id="cartpole_demo_special" class="unselectable" style="text-align: left;"></div>
+<figcaption style="text-align: left;">
+<b>Dealing with a large unspecified number of additional noisy imput channels</b><br/>
+Without additional training, our agent receives 15 input signals in shuffled order, 10 of which are pure Gaussian noise (σ=0.1), and the other 5 are the actual observations from the environment. Like the earlier demo, the user can shuffle the order of the 15 inputs, and observe how the agent adapts to the new ordering of the inputs.
+</figcaption>
+</div>
+
+The existing policy is still able to perform the task, demonstrating the system's ability to work with a large number of inputs and attend only to channels it deems useful. Such flexibility may find useful applications for processing a large unspecified number of signals, most of which are noise, from ill-defined systems.
 
 ______
 
@@ -252,7 +263,7 @@ Here, we are interested in solving screen-shuffled versions of vision-based RL e
 <div style="text-align: left;">
 <video class="b-lazy" data-src="assets/mp4/pong_reshuffle.mp4" type="video/mp4" autoplay muted playsinline loop style="margin: 0; width: 100%;" ></video>
 <figcaption style="text-align: left;">
-<b>Pong and <i>Shuffled Pong</i></b>
+<b>Pong and <i>Puzzle Pong</i></b>
 </figcaption>
 </figcaption>
 </div>
@@ -261,7 +272,7 @@ But rather than throwing away the spatial structure entirely from our solution, 
 
 Unlike typical CNN policies, our agent can accept a subset of the screen, since the agent's input is a variable-length list of patches.
 It would thus be interesting to deliberately randomly discard a certain percentage of the patches and see how the agent reacts.
-The net effect of this experiment for humans is similar to being asked to play a partially occluded and shuffled version of Atari Pong. During training via BC, we randomly remove a percentage of observation patches. In tests, we fix the randomly selected positions of patches to discard during an entire episode. The following figure demonstrates *shuffled pong* when we also remove 70% of the patches:
+The net effect of this experiment for humans is similar to being asked to play a partially occluded and shuffled version of Atari Pong. During training via BC, we randomly remove a percentage of observation patches. In tests, we fix the randomly selected positions of patches to discard during an entire episode. The following figure demonstrates the agent's effective policy even when we also remove 70% of the patches:
 
 <div style="text-align: left;">
 <video class="b-lazy" data-src="assets/mp4/pong_occluded_reshuffle.mp4" type="video/mp4" autoplay muted playsinline loop style="margin: 0; width: 100%;" ></video>
@@ -307,7 +318,6 @@ ______
 <b>CarRacing base task (left), modified shuffled-screen task (right)</b><br/>
 Our agent is only trained on this environment.
 The right screen is what our agent observes and the left is for human visualization. A human will find driving with the shuffled observation to be very difficult because we are not constantly exposed to such tasks, just like in the “reverse bicycle” example mentioned earlier.
-We demonstrate zero-shot generalization results in modified environments where the background is replaced with other images.
 </figcaption>
 </div>
 
@@ -342,9 +352,9 @@ The end result is a policy with two layers of attention: the first layer outputs
 We first train the agent in the CarRacing <dt-cite key="carracing_v0"></dt-cite> environment, and report the average score from 100 test roll-outs in the following table.
 As the first column shows, our agent's performance in the training environment is slightly lower but comparable to the baseline method, as expected. But because our agent accepts randomly shuffled inputs, it is still able to navigate even when the patches are shuffled.
 
-<div style="text-align: center;">
+<div style="text-align: left;">
 <img class="b-lazy" src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== data-src="assets/png/table_carracing_results.png" style="display: block; margin: auto; width: 100%;"/>
-<figcaption style="text-align: left;">
+<figcaption style="text-align: center;">
 <b>CarRacing Test Result</b>
 </figcaption>
 </div>
@@ -396,7 +406,7 @@ ______
 
 ## Discussion and Future Work
 
-In this work, we investigate the properties of RL agents that can treat their observations as an arbitrarily ordered, variable-length list of sensory inputs. By processing each input stream independently, and consolidating the processed information using attention, our agents can still perform their tasks even if the ordering of the observations is randomly permuted several times during an episode, without explicitly trained for frequent re-shuffling (See the following table).
+In this work, we investigate the properties of RL agents that can treat their observations as an arbitrarily ordered, variable-length list of sensory inputs. By processing each input stream independently, and consolidating the processed information using attention, our agents can still perform their tasks even if the ordering of the observations is randomly permuted several times during an episode, without explicitly trained for frequent re-shuffling. We report results of performance versus shuffling frequency in the following table for each environment:
 
 <div style="text-align: center;">
 <img class="b-lazy" src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== data-src="assets/png/table_shuffling_results.png" style="display: block; margin: auto; width: 100%;"/>
@@ -423,5 +433,3 @@ It is exciting to see future works that include signals such as environmental re
 Our work also provides a way to view the Transformer <dt-cite key="vaswani2017"></dt-cite> through the lens of self-organizing neural networks. Transformers are known to have potentially negative societal impacts highlighted in studies about possible data-leakage and privacy vulnerabilities <dt-cite key="carlini2020extracting"></dt-cite>, malicious misuse and issues concerning bias and fairness <dt-cite key="bender2021dangers"></dt-cite>, and energy requirements for training these models <dt-cite key="strubell2019energy"></dt-cite>.
 
 *If you would like to discuss any issues or give feedback, please visit the [GitHub](https://github.com/attentionneuron/attentionneuron.github.io/issues) repository of this page for more information.*
-
-
