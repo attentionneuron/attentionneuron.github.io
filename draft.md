@@ -64,7 +64,7 @@ Here, we provide a simple, non-rigorous example demonstrating permutation invari
 
 As mentioned earlier, in its simplest form, self-attention is described as:
 
-$y = \sigma(QK^{\top})V$
+&nbsp;&nbsp;&nbsp;&nbsp;$y = \sigma(QK^{\top})V$
 <!--<div style="text-align: center;">
 <img class="b-lazy" src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== data-src="assets/png/equation_pi_explanation_part_0.png" style="display: block; margin: auto; width: 100%;"/>
 </div>-->
@@ -74,13 +74,13 @@ where $Q \in \mathcal{R}^{N_q \times d_q}, K \in \mathcal{R}^{N \times d_q}, V \
 We would like to show that the output $y$ is the same regardless of the ordering of the rows of $K, V$. For simplicity, suppose $N=3$, $N_q=2$, $d_q=d_v=1$, so that $Q \in \mathcal{R}^{2 \times 1}$, $K \in \mathcal{R}^{3 \times 1}$, $V \in \mathcal{R}^{3 \times 1}$:
 
 <div style="text-align: center;">
-<img class="b-lazy" src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== data-src="assets/png/equation_pi_explanation_part_1.png" style="display: block; margin: auto; width: 100%;"/>
+<img class="b-lazy" src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== data-src="assets/png/equation_pi_explanation_part_1.larger.png" style="display: block; margin: auto; width: 100%;"/>
 </div>
 
 The output $y \in \mathcal{R}^{2 \times 1}$ remains the same when the rows of $K, V$ are permuted from $[1, 2, 3]$ to $[3, 1, 2]$:
 
 <div style="text-align: center;">
-<img class="b-lazy" src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== data-src="assets/png/equation_pi_explanation_part_2.png" style="display: block; margin: auto; width: 100%;"/>
+<img class="b-lazy" src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== data-src="assets/png/equation_pi_explanation_part_2.larger.png" style="display: block; margin: auto; width: 100%;"/>
 </div>
 
 We have highlighted the same terms with the same color in both equations to show the results are indeed identical. In general, we have $y_{ij} = \sum_{b=1}^{N} \sigma [ \sum_{a=1}^{d_q} Q_{ia} K_{ba} ] V_{bj}$. Permuting the input is equivalent to permuting the indices $b$ (i.e. rows of $K$ and $V$), which only affects the order of the outer summation and does not affect $y_{ij}$ because summation is a permutation invariant operation. Notice that in the above example and the proof here we have assumed that $\sigma(\cdot)$ is an element-wise operation--a valid assumption since most activation functions satisfy this condition.<dt-fn>Applying <i>softmax</i> to each row only brings scalar multipliers to each row and the proof still holds.</dt-fn>
@@ -104,7 +104,7 @@ AttentionNeuron is a standalone layer, in which each sensory neuron only has acc
 The operations inside AttentionNeuron can be described by the following two equations:
 
 <div style="text-align: center;">
-<img class="b-lazy" src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== data-src="assets/png/attentionneuron_equations.png" style="display: block; margin: auto; width: 100%;"/>
+<img class="b-lazy" src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== data-src="assets/png/attentionneuron_equations.larger.png" style="display: block; margin: auto; width: 100%;"/>
 </div>
 
 Equation 1 shows how each of the $N$ sensory neuron independently generates its messages $f_k$ and $f_v$, which are functions shared across all sensory neurons. Equation 2 shows the attention mechanism aggregate these messages. Note that although we could have absorbed the projection matrices $W_q, W_k, W_v$ into $Q, K, V$, we keep them in the equation to show explicitly the formulation. Equation 2 is almost identical to the simple definition of self-attention mentioned earlier. Following <dt-cite key="set2019"></dt-cite>, we make our $Q$ matrix a bank of fixed embeddings, rather than depend on the observation $o_t$.
@@ -149,7 +149,7 @@ For non-vision continuous control tasks, the agent receives an observation vecto
 
 For vision based tasks, we gray-scale and stack $k=4$ consecutive RGB frames from the environment, and thus our agent observes $o_t \in \mathcal{R}^{H \times W \times k}$.
 $o_t$ is split into non-overlapping patches of size $P=6$ using a sliding window, so each sensory neuron observes $o_t[i] \in \mathcal{R}^{6 \times 6 \times k}$.
-Here, $f_v(o_t[i])$ flattens the data and returns it, hence $V(o_t)$ returns a tensor of shape $N \times d_{f_v} = N \times (6 \times 6 \times 4) = N \times 144$. Due to the high dimensionality for vision tasks, we do not use RNNs for $f_k$, but instead use a simpler method to process each sensory input. $f_k(o_t[i], a_{t-1})$ takes the difference between consecutive frames ($o_t[i]$), then flattens the result, appends $a_{t-1}$, and returns the concatenated vector. $K(o_t, a_{t-1})$ thus gives a tensor of shape $N \times d_{f_k} = N \times [(6 \times 6 \times 3) + |A|] = N \times (108 + |A|)$ (111 for CarRacing and 114 for Atari Pong). We use ${softmax}$ as the non-linear activation function $\sigma(\cdot)$, and we apply layer normalization <dt-cite key="ba2016layer"></dt-cite> to both the input patches and the output latent code.
+Here, $f_v(o_t[i])$ flattens the data and returns it, hence $V(o_t)$ returns a tensor of shape $N \times d_{f_v} = N \times (6 \times 6 \times 4) = N \times 144$. Due to the high dimensionality for vision tasks, we do not use RNNs for $f_k$, but instead use a simpler method to process each sensory input. $f_k(o_t[i], a_{t-1})$ takes the difference between consecutive frames ($o_t[i]$), then flattens the result, appends $a_{t-1}$, and returns the concatenated vector. $K(o_t, a_{t-1})$ thus gives a tensor of shape $N \times d_{f_k}$ $=$ $N \times [(6 \times 6 \times 3) + |A|]$ $=$ $N \times (108 + |A|)$ (111 for CarRacing and 114 for Atari Pong). We use *softmax* as the non-linear activation function $\sigma(\cdot)$, and we apply layer normalization <dt-cite key="ba2016layer"></dt-cite> to both the input patches and the output latent code.
 
 ______
 
@@ -173,7 +173,7 @@ We use a two-layer neural network as our agent. The first layer is an AttentionN
 We report experimental results in the following table:
 
 <div style="text-align: center;">
-<img class="b-lazy" src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== data-src="assets/png/table_cartpole_results.png" style="display: block; margin: auto; width: 100%;"/>
+<img class="b-lazy" src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== data-src="assets/png/table_cartpole_results.larger.png" style="display: block; margin: auto; width: 100%;"/>
 <figcaption style="text-align: left;">
 <b>Cart-pole Tests</b><br/>
 For each experiment, we report the average score and the standard deviation from 1000 test episodes. Our agent is trained only in the environment with 5 sensory inputs.
@@ -188,7 +188,7 @@ When we replace the 5 extra signals with white noises with $\sigma=0.1$ (column 
 The AttentionNeuron layer should possess 2 properties to achieve these: its output is permutation invariant to its input, and its output carries task-relevant information.
 The following figure is a visual confirmation of the permutation invariant property, whereby we plot the output messages from the layer and their changes over time from two tests. Using same environment seed, we keep the observation as-is in the first test but we shuffle the order in the second. As the figure shows, the output messages are identical in the two roll-outs.
 
-<div style="text-align: center;">
+<div style="text-align: left;">
 <img class="b-lazy" src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== data-src="assets/png/figure_cartpole_shuffle.png" style="display: block; margin: auto; width: 75%;"/>
 <figcaption style="text-align: left;">
 <b>Permutation invariant outputs</b><br/>
@@ -200,7 +200,7 @@ We also perform a simple linear regression analysis on the outputs (based on the
 The following table shows the $R^2$ values<dt-fn>$R^2$ measures the goodness-of-fit of a model. An $R^2$ of 1 implies that the regression perfectly fits the data.</dt-fn> from this analysis, suggesting that some important indicators (e.g. $\dot{x}$ and $\dot{\theta}$) are well represented in the output:
 
 <div style="text-align: center;">
-<img class="b-lazy" src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== data-src="assets/png/table_cartpole_explanation.png" style="display: block; margin: auto; width: 100%;"/>
+<img class="b-lazy" src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== data-src="assets/png/table_cartpole_explanation.larger.png" style="display: block; margin: auto; width: 100%;"/>
 <figcaption style="text-align: left;">
 <b>Linear regression analysis on the output</b><br/>
 For each of the <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>N</mi><mo>=</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">N=5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.10903em;">N</span><span class="mrel">=</span><span class="mord mathrm">5</span></span></span></span> sensory inputs we have one LR model with <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>m</mi><mi>t</mi></msub><mo>∈</mo><msup><mrow><mi mathvariant="script">R</mi></mrow><mrow><mn>1</mn><mn>6</mn></mrow></msup></mrow><annotation encoding="application/x-tex">m_t \in \mathcal{R}^{16}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.8141079999999999em;"></span><span class="strut bottom" style="height:0.964108em;vertical-align:-0.15em;"></span><span class="base textstyle uncramped"><span class="mord"><span class="mord mathit">m</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathit">t</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mrel">∈</span><span class=""><span class="mord textstyle uncramped"><span class="mord mathcal">R</span></span><span class="vlist"><span style="top:-0.363em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord scriptstyle uncramped"><span class="mord mathrm">1</span><span class="mord mathrm">6</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span></span> as the explanatory variables.
@@ -214,7 +214,7 @@ Finally, to accompany the quantitative results in this section, we extended the 
 <figcaption style="color:#FF6C00;">Interactive Demo</figcaption><br/>
 <div id="cartpole_demo_special" class="unselectable" style="text-align: left;"></div>
 <figcaption style="text-align: left;">
-<b>Dealing with a large unspecified number of additional noisy imput channels</b><br/>
+<b>Dealing with unspecified number of extra noisy channels</b><br/>
 Without additional training, our agent receives 15 input signals in shuffled order, 10 of which are pure Gaussian noise (σ=0.1), and the other 5 are the actual observations from the environment. Like the earlier demo, the user can shuffle the order of the 15 inputs, and observe how the agent adapts to the new ordering of the inputs.
 </figcaption>
 </div>
@@ -228,10 +228,10 @@ ______
 While direct policy search methods such as evolution strategies (ES) can train permutation invariant RL agents, often times we already have access to pre-trained agents or recorded human data performing the task at hand.
 Behavior cloning (BC) can allow us to convert an existing policy to a version that is permutation invariant with desirable properties associated with it. We report experimental results here:
 
-<div style="text-align: center;">
-<img class="b-lazy" src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== data-src="assets/png/table_bulletant_results.png" style="display: block; margin: auto; width: 100%;"/>
-<figcaption style="text-align: center;">
-<b>PyBullet Ant Results</b>
+<div style="text-align: left;">
+<img class="b-lazy" src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== data-src="assets/png/table_bulletant_results.larger.png" style="display: block; margin: auto; width: 100%;"/>
+<figcaption style="text-align: left;">
+<b>PyBullet Ant Experimental Results</b>
 </figcaption>
 </div>
 
@@ -283,8 +283,8 @@ The net effect of this experiment for humans is similar to being asked to play a
 
 We present the results in a heat map in the following fiture, where the y-axis shows the patches removed during training and the x-axis gives the patch occlusion ratio in tests:
 
-<div style="text-align: center;">
-<img class="b-lazy" src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== data-src="assets/png/pong_results.png" style="display: block; margin: auto; width: 100%;"/>
+<div style="text-align: left;">
+<img class="b-lazy" src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== data-src="assets/png/pong_results.larger.png" style="display: block; margin: auto; width: 100%;"/>
 <figcaption style="text-align: left;">
 <b>Linear regression analysis on the output</b><br/>
 Mean test scores in Atari Pong, and example of a randomly-shuffled occluded observation.} In the heat map, each value is the average score from 100 test episodes.
@@ -353,9 +353,9 @@ We first train the agent in the CarRacing <dt-cite key="carracing_v0"></dt-cite>
 As the first column shows, our agent's performance in the training environment is slightly lower but comparable to the baseline method, as expected. But because our agent accepts randomly shuffled inputs, it is still able to navigate even when the patches are shuffled.
 
 <div style="text-align: left;">
-<img class="b-lazy" src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== data-src="assets/png/table_carracing_results.png" style="display: block; margin: auto; width: 100%;"/>
-<figcaption style="text-align: center;">
-<b>CarRacing Test Result</b>
+<img class="b-lazy" src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== data-src="assets/png/table_carracing_results.larger.png" style="display: block; margin: auto; width: 100%;"/>
+<figcaption style="text-align: left;">
+<b>CarRacing Test Results</b>
 </figcaption>
 </div>
 
@@ -409,7 +409,7 @@ ______
 In this work, we investigate the properties of RL agents that can treat their observations as an arbitrarily ordered, variable-length list of sensory inputs. By processing each input stream independently, and consolidating the processed information using attention, our agents can still perform their tasks even if the ordering of the observations is randomly permuted several times during an episode, without explicitly trained for frequent re-shuffling. We report results of performance versus shuffling frequency in the following table for each environment:
 
 <div style="text-align: center;">
-<img class="b-lazy" src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== data-src="assets/png/table_shuffling_results.png" style="display: block; margin: auto; width: 100%;"/>
+<img class="b-lazy" src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== data-src="assets/png/table_shuffling_results.larger.png" style="display: block; margin: auto; width: 100%;"/>
 <figcaption style="text-align: left;">
 <b>Reshuffle observations during a roll-out</b><br/>
 In each test episode, we reshuffle the observations every $t$ steps.
