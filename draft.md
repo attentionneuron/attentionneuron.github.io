@@ -373,7 +373,7 @@ To gain some insight into how the agent achieves its generalization ability, we 
 <video class="b-lazy" data-src="assets/mp4/fuji_attended_patch.mp4" type="video/mp4" autoplay muted playsinline loop style="width:100%;" ></video>
 <figcaption style="text-align: left;">
 <b>Attention visualization</b><br/>
-We plot the patches that received the most attention by highlighting them.<br/>
+We highlight the patches that receive the most attention.<br/>
 Top: Attention plot in training environment.<br/>
 Bottom: Attention plot in a test environment with unseen background.
 </figcaption>
