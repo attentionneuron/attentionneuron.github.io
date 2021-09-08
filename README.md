@@ -1,6 +1,6 @@
 # The Sensory Neuron as a Transformer: Permutation-Invariant Neural Networks for Reinforcement Learning
 
-This repo contains the source for the article.
+This repo contains the source for the article. (arxiv link: https://arxiv.org/abs/2109.02869)
 
 ### If all you want to do is view the page locally
 
