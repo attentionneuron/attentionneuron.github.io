@@ -2,6 +2,8 @@
 
 This repo contains the source for the article. (arxiv link: https://arxiv.org/abs/2109.02869)
 
+The article is served at https://attentionneuron.github.io/
+
 ### If all you want to do is view the page locally
 
 Run `python -m http.server` to serve on the base directory to view `index.html` in a local browser.
