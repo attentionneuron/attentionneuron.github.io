@@ -211,6 +211,7 @@ For each of the <span class="katex"><span class="katex-mathml"><math><semantics>
 Finally, to accompany the quantitative results in this section, we extended the earlier interactive demo to showcase the flexibility of PI agents. Here, our agent, with no additional training, receives 15 input signals in shuffled order, ten of which are pure noise, and the other five are the actual observations from the environment.
 
 <div style="text-align: left;">
+<a name="noise-demo"></a>
 <figcaption style="color:#FF6C00;">Interactive Demo</figcaption><br/>
 <div id="cartpole_demo_special" class="unselectable" style="text-align: left;"></div>
 <figcaption style="text-align: left;">
