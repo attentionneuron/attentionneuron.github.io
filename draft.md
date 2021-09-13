@@ -413,7 +413,7 @@ In this work, we investigate the properties of RL agents that can treat their ob
 <img class="b-lazy" src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== data-src="assets/png/table_shuffling_results.larger.png" style="display: block; margin: auto; width: 100%;"/>
 <figcaption style="text-align: left;">
 <b>Reshuffle observations during a roll-out</b><br/>
-In each test episode, we reshuffle the observations every $t$ steps.
+In each test episode, we reshuffle the observations every <i>t</i> steps.
 For CartPole, we test for 1000 episodes because of its larger task variance. For the other tasks, we report mean and standard deviation from 100 tests.  All environments except for Atari Pong have a hard limit of 1000 time steps per episode. In Atari Pong, while the maximum length of an episode does not exist, we observed that an episode usually lasts for around 2500 steps.
 </figcaption>
 </div>
@@ -425,12 +425,12 @@ This could be useful in many real world applications. For example, such policies
 
 Another limitation is that the permutation invariant property apply only to the inputs, and not to the outputs. While the ordering of the observations can be shuffled, the ordering of the actions cannot. For permutation invariant outputs to work, each action will require feedback from the environment, including reward information, in order to learn the relationship between itself and the environment.
 
-**Future Work**&nbsp; An interesting future direction is to also make the action layer have the same properties, and model each *motor neuron* as a module connected using attention. With such methods, it may be possible to train an agent with an arbitrary number of legs, or control robots with different morphology using a single policy that is also provided with a reward signal as feedback.
-%Moreover, our method accepts previous actions as a feedback signal in this work. However, the feedback signal is not restricted to the actions.
-It is exciting to see future works that include signals such as environmental rewards to train permutation invariant meta-learning agents that can adapt to not only changes in the observed environment, but also to changes to itself.
-
 **Societal Impact**&nbsp; Like most algorithms proposed in computer science and machine learning, our method can be applied in ways that will have potentially positive or negative impacts to society. While our small-scale, self-contained experiments study only the properties of RL agents that are permutation invariant to their observations, and we believe our results do not directly cause harm to society, the robustness and flexible properties of the method may be of use for data-collection systems that receive data from a large variable number of sensors. For instance, one could apply permutation invariant sensory systems to process data from millions of sensors for anomaly detection, which may result in both positive or negative impacts, if used in applications such as large-scale sensor analysis for weather forecasting, or deployed in large-scale surveillance systems that could undermine our basic freedoms.
 
 Our work also provides a way to view the Transformer <dt-cite key="vaswani2017"></dt-cite> through the lens of self-organizing neural networks. Transformers are known to have potentially negative societal impacts highlighted in studies about possible data-leakage and privacy vulnerabilities <dt-cite key="carlini2020extracting"></dt-cite>, malicious misuse and issues concerning bias and fairness <dt-cite key="bender2021dangers"></dt-cite>, and energy requirements for training these models <dt-cite key="strubell2019energy"></dt-cite>.
+
+**Future Work**&nbsp; An interesting future direction is to also make the action layer have the same properties, and model each *motor neuron* as a module connected using attention. With such methods, it may be possible to train an agent with an arbitrary number of legs, or control robots with different morphology using a single policy that is also provided with a reward signal as feedback.
+Moreover, our method accepts previous actions as a feedback signal in this work. However, the feedback signal is not restricted to the actions.
+We look forward to see future works that include signals such as environmental rewards to train permutation invariant meta-learning agents that can adapt to not only changes in the observed environment, but also to changes to itself.
 
 *If you would like to discuss any issues or give feedback, please visit the [GitHub](https://github.com/attentionneuron/attentionneuron.github.io/issues) repository of this page for more information.*

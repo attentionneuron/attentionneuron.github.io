@@ -1,12 +1,16 @@
 ## Acknowledgements
 
-The authors would like to thank Rishabh Agarwal, Jie Tan, Yingtao Tian, Douglas Eck, Aleksandra Faust for valuable discussion and feedback.
+The authors would like to thank Rishabh Agarwal, Jie Tan, Yingtao Tian, Douglas Eck, Aleksandra Faust and our reviewers for valuable discussion and feedback.
 
 The experiments in this work were performed on virtual machines provided by [Google Cloud Platform](https://cloud.google.com/).
 
 This article was prepared using the [Distill](https://distill.pub) [template](https://github.com/distillpub/template). Interactive demos were built with [p5.js](https://p5js.org).
 
 Any errors here are our own and do not reflect opinions of our proofreaders and colleagues. If you see mistakes or want to suggest changes, feel free to contribute feedback by participating in the discussion [forum](https://github.com/attentionneuron/attentionneuron.github.io/issues) for this article.
+
+<div style="text-align: left;">
+<img src="assets/svg/neuron.svg" alt="Vision Icon by artist Laymik on Noun Project." style="display: block; margin: auto; width: 4.5%;" align="left"/>&nbsp;&nbsp;Vision icon by artist <a href="https://thenounproject.com/Maludk/collection/human-anatomy-line-icons/">Laymik</a>.
+</div>
 
 <h3 id="citation">Citation</h3>
 
