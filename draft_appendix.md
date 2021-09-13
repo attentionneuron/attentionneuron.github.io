@@ -9,7 +9,7 @@ This article was prepared using the [Distill](https://distill.pub) [template](ht
 Any errors here are our own and do not reflect opinions of our proofreaders and colleagues. If you see mistakes or want to suggest changes, feel free to contribute feedback by participating in the discussion [forum](https://github.com/attentionneuron/attentionneuron.github.io/issues) for this article.
 
 <div style="text-align: left;">
-<img src="assets/svg/neuron.svg" alt="Vision Icon by artist Laymik on Noun Project." style="display: block; margin: auto; width: 4.5%;" align="left"/>&nbsp;&nbsp;Vision icon by artist <a href="https://thenounproject.com/Maludk/collection/human-anatomy-line-icons/">Laymik</a>.
+<img src="assets/svg/neuron.svg" alt="Vision Icon by artist Laymik on Noun Project." style="display: block; margin: auto; width: 4.5%;" align="left"/>&nbsp;&nbsp;Neuron icon by artist <a href="https://thenounproject.com/Maludk/collection/human-anatomy-line-icons/">Laymik</a>.
 </div>
 
 <h3 id="citation">Citation</h3>
