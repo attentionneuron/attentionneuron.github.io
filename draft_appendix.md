@@ -58,7 +58,7 @@ The costs of ES training are summarized in the following table. A maximum of 20K
 |---|---|---|---|---|
 | Number of Generations &nbsp; | &nbsp; 14,000 &nbsp; | &nbsp; 12,000 &nbsp; | &nbsp; 4,000 &nbsp; | &nbsp; - &nbsp; |
 
-Note that we used the hyper-parameters (e.g., population size, rollout repetitions) that proved to work on a wide range of tasks in past experiences, and did not tune them for each experiment. In other words, these settings were not chosen with sample-efficiency in mind, but rather for learning a working PI-capable policy using distributed computation within a reasonable wall-clock time budget.
+Note that we used the hyper-parameters (e.g., population size, rollout repetitions) that proved to work on a wide range of tasks from past experience, and did not tune them for each experiment. In other words, these settings were not chosen with sample-efficiency in mind, but rather for learning a working PI-capable policy using distributed computation within a reasonable wall-clock time budget.
 
 We consider two possible approaches when we take sample-efficiency into consideration.
 In the experiments, we have demonstrated that it is possible to simply use state-of-the-art RL algorithms to learn a non-PI policy, and then use BC to produce a PI version of the policy.
