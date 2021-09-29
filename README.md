@@ -1,6 +1,6 @@
 # The Sensory Neuron as a Transformer: Permutation-Invariant Neural Networks for Reinforcement Learning
 
-This repo contains the source for the article. (arxiv link: https://arxiv.org/abs/2109.02869)
+This repo contains the source for the NeurIPS2021 paper (link: https://arxiv.org/abs/2109.02869).
 
 The article is served at https://attentionneuron.github.io/
 

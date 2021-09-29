@@ -1,6 +1,6 @@
 ## Acknowledgements
 
-The authors would like to thank Rishabh Agarwal, Jie Tan, Yingtao Tian, Douglas Eck, Aleksandra Faust and our reviewers for valuable discussion and feedback.
+The authors would like to thank Rishabh Agarwal, Jie Tan, Yingtao Tian, Douglas Eck, Aleksandra Faust and our NeurIPS2021 reviewers for valuable discussion and feedback.
 
 The experiments in this work were performed on virtual machines provided by [Google Cloud Platform](https://cloud.google.com/).
 
