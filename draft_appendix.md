@@ -20,14 +20,17 @@ For attribution in academic contexts, please cite this work as
 
 BibTeX citation
 
-<pre class="citation long">@article{attentionneuron2021,
-  author = {Yujin Tang and David Ha},
-  title  = {The Sensory Neuron as a Transformer: Permutation-Invariant Neural Networks for Reinforcement Learning},
-  eprint = {arXiv:2109.02869},
-  url    = {https://attentionneuron.github.io},
-  note   = "\url{https://attentionneuron.github.io}",
-  year   = {2021}
-}</pre>
+<pre class="citation long">
+@incollection{attentionneuron2021,
+  author    = {Yujin Tang and David Ha},
+  title     = {The Sensory Neuron as a Transformer: Permutation-Invariant Neural Networks for Reinforcement Learning},
+  booktitle = {Advances in Neural Information Processing Systems 34},
+  year      = {2021},
+  publisher = {Curran Associates, Inc.},
+  url       = {https://attentionneuron.github.io},
+  note      = "\url{https://attentionneuron.github.io}",
+}
+</pre>
 
 ## Open Source Code
 
