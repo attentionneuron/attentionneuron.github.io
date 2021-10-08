@@ -34,7 +34,7 @@ BibTeX citation
 
 ## Open Source Code
 
-We will provide a reference implementation to replicate results of this work soon.
+Please see our [repo](https://github.com/google/brain-tokyo-workshop) for details about the code release.
 
 ## Reuse
 
