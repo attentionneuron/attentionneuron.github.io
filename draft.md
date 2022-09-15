@@ -130,7 +130,7 @@ To achieve this, we want $f_k(o_t[i], a_{t-1})$ to have temporal memories.
 In practice, we find both RNNs and feed-forward neural networks (FNN) with stacked observations work well, with FNNs being more practical for environments with high dimensional observations.
 
 In addition to the temporal memory, including previous actions is important for the input identification too. Although the former allows the neurons to infer the input signals based on the characteristics of the temporal stream, this may not be sufficient. For example, when controlling a legged robot, most of the sensor readings are joint angles and velocities from the legs, which are not only numerically identically bounded but also change in similar patterns.
-The inclusion of previous actions gives each sensory neuron a chance to infer the casual relationship between the input channel and the applied actions, which helps with the input identification.
+The inclusion of previous actions gives each sensory neuron a chance to infer the causal relationship between the input channel and the applied actions, which helps with the input identification.
 
 Finally, in Equation 2 we could have combined $QW_q \in \mathcal{R}^{M \times d_q}$ as a single learnable parameters matrix, but we separate them for two reasons.
 First, by factoring into two matrices, we can reduce the number of learnable parameters.
